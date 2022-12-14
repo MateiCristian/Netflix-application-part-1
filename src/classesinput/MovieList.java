@@ -1,4 +1,6 @@
-package Classes;
+package classesinput;
+
+import classes.Movie;
 
 import java.util.ArrayList;
 public class MovieList extends Movie {
@@ -9,51 +11,87 @@ public class MovieList extends Movie {
     private ArrayList<String> actors;
     private ArrayList<String> countriesBanned;
 
+    /**
+     * @return
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * @param name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * @return
+     */
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    /**
+     * @param year
+     */
+    public void setYear(final int year) {
         this.year = year;
     }
 
+    /**
+     * @return
+     */
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    /**
+     * @param duration
+     */
+    public void setDuration(final int duration) {
         this.duration = duration;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
+    /**
+     * @param genres
+     */
+    public void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    /**
+     * @param actors
+     */
+    public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getCountriesBanned() {
         return countriesBanned;
     }
 
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+    /**
+     * @param countriesBanned
+     */
+    public void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
 }

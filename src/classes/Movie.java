@@ -1,4 +1,4 @@
-package Classes;
+package classes;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,9 @@ public class Movie {
     private int numLikes;
     private double rating;
     private int numRatings;
-    public Movie(){}
-    public Movie(Movie movie) {
+    public Movie() {
+    }
+    public Movie(final Movie movie) {
         this.name = movie.getName();
         this.year = movie.getYear();
         this.duration = movie.getDuration();
@@ -25,90 +26,147 @@ public class Movie {
         this.numRatings = movie.getNumRatings();
     }
 
+    /**
+     * @return
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * @param name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * @return
+     */
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    /**
+     * @param year
+     */
+    public void setYear(final int year) {
         this.year = year;
     }
 
+    /**
+     * @return
+     */
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    /**
+     * @param duration
+     */
+    public void setDuration(final int duration) {
         this.duration = duration;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
+    /**
+     * @param genres
+     */
+    public void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    /**
+     * @param actors
+     */
+    public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
+    /**
+     * @return
+     */
     public ArrayList<String> getCountriesBanned() {
         return countriesBanned;
     }
 
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+    /**
+     * @param countriesBanned
+     */
+    public void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
 
+    /**
+     * @return
+     */
     public int getNumLikes() {
         return numLikes;
     }
 
-    public void setNumLikes(int numLikes) {
+    /**
+     * @param numLikes
+     */
+    public void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
     }
 
+    /**
+     * @return
+     */
     public Double getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    /**
+     * @param rating
+     */
+    public void setRating(final Double rating) {
         this.rating = rating;
     }
 
+    /**
+     * @return
+     */
     public int getNumRatings() {
         return numRatings;
     }
 
-    public void setNumRatings(int numRatings) {
+    /**
+     * @param numRatings
+     */
+    public void setNumRatings(final int numRatings) {
         this.numRatings = numRatings;
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
-        return "Movie{" +
-                "name='" + name + '\'' +
-                ", year=" + year +
-                ", duration=" + duration +
-                ", genres=" + genres +
-                ", actors=" + actors +
-                ", countriesBanned=" + countriesBanned +
-                ", numLikes=" + numLikes +
-                ", rating=" + rating +
-                ", numRatings=" + numRatings +
-                '}';
+        return "Movie{"
+                + "name='" + name + '\''
+                + ", year=" + year
+                + ", duration=" + duration
+                + ", genres=" + genres
+                + ", actors=" + actors
+                + ", countriesBanned=" + countriesBanned
+                + ", numLikes=" + numLikes
+                + ", rating=" + rating
+                + ", numRatings=" + numRatings
+                + '}';
     }
 }

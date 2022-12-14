@@ -1,9 +1,13 @@
-package Classes;
+package classes;
 
+import classesinput.Filters;
+import classesinput.Sort;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static checker.CheckStyleConstants.CHECKSTYLE_POINTS;
 
 public class Data {
     private Page currentPage;
@@ -16,34 +20,57 @@ public class Data {
         currentMoviesList = new ArrayList<>();
     }
 
+    /**
+     * @return a simple getter for currentUser
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
+    /**
+     * @param currentUser a simple setter for currentUser
+     */
+    public void setCurrentUser(final User currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * @return a simple getter for currentMoviesList
+     */
     public ArrayList<Movie> getCurrentMoviesList() {
         return currentMoviesList;
     }
 
-    public void setCurrentMoviesList(ArrayList<Movie> currentMoviesList) {
+    /**
+     * @param currentMoviesList a simple setter for currentMoviesList
+     */
+    public void setCurrentMoviesList(final ArrayList<Movie> currentMoviesList) {
         this.currentMoviesList = currentMoviesList;
     }
 
+    /**
+     * @return a simple getter for currentPage
+     */
     public Page getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(Page currentPage) {
+    /**
+     * @param currentPage a simple setter for currentPage
+     */
+    public void setCurrentPage(final Page currentPage) {
         this.currentPage = currentPage;
     }
 
-    public void search(String startWith, ArrayNode output) {
+    /**
+     * @param startWith is the starting string from input
+     * @param output is the output where we write a json
+     *               method search for a movie which name starts with startWith
+     */
+    public void search(final String startWith, final ArrayNode output) {
         ArrayList<Movie> newMovies = new ArrayList<>();
-        for (int i = 0; i < currentMoviesList.size(); i++){
-            if (currentMoviesList.get(i).getName().startsWith(startWith)){
+        for (int i = 0; i < currentMoviesList.size(); i++) {
+            if (currentMoviesList.get(i).getName().startsWith(startWith)) {
                 newMovies.add(currentMoviesList.get(i));
             }
         }
@@ -55,38 +82,43 @@ public class Data {
         classOutput.setCurrentMoviesList(newMovies);
         output.addPOJO(classOutput);
     }
-    public void filter(Filters newfilter, ArrayNode output) {
+
+    /**
+     * @param newfilter is the filter from input
+     * @param output is the output where we write a json
+     *               method implements all the filter task
+     *               it sorts elements by rating / duration / actors and genres
+     */
+    public void filter(final Filters newfilter, final ArrayNode output) {
         Sort newsort = newfilter.getSort();
-        //trebe modificat ceva sa mearga si 8
+
         if (newsort != null) {
             if (newsort.getRating() != null) {
                 if (newsort.getRating().equals("decreasing")) {
                     Collections.sort(this.currentMoviesList, (o1, o2) -> {
-                        if (o1.getRating() < o2.getRating()) {
-                            return -1;
-                        } else
-                            if (o1.getRating() > o2.getRating())
-                                return 1;
-                            else
-                                return -1;
-                    });
-                } else {
-                    Collections.sort(this.currentMoviesList, (o1, o2) -> {
                         if (o1.getRating() > o2.getRating()) {
                             return -1;
-                        } else
-                            if (o1.getRating() < o2.getRating())
-                                return 1;
-                            else
-                                return 1;
+                        } else {
+                            return 1;
+                        }
                     });
+                } else {
+                    if (newsort.getRating().equals("increasing")) {
+                        Collections.sort(this.currentMoviesList, (o1, o2) -> {
+                            if (o1.getRating() < o2.getRating()) {
+                                return -1;
+                            } else {
+                                return 1;
+                            }
+                        });
+                    }
                 }
             }
 
             if (newsort.getDuration() != null) {
                 if (newsort.getDuration().equals("decreasing")) {
                     Collections.sort(this.currentMoviesList, (o1, o2) -> {
-                        if (o1.getDuration() < o2.getDuration()) {
+                        if (o1.getDuration() <= o2.getDuration()) {
                             return 1;
                         } else {
                             return -1;
@@ -104,10 +136,10 @@ public class Data {
             }
         }
 
-        if (newfilter.getContains() != null){
-            if (newfilter.getContains().getActors() != null){
-                for (int i = 0; i < newfilter.getContains().getActors().size(); i++){
-                    for (int j = 0; j < this.currentMoviesList.size(); j++){
+        if (newfilter.getContains() != null) {
+            if (newfilter.getContains().getActors() != null) {
+                for (int i = 0; i < newfilter.getContains().getActors().size(); i++) {
+                    for (int j = 0; j < this.currentMoviesList.size(); j++) {
                         if (!this.currentMoviesList.get(j).getActors().contains(
                                 newfilter.getContains().getActors().get(i))) {
                             this.currentMoviesList.remove(j);
@@ -116,9 +148,10 @@ public class Data {
                     }
                 }
             }
-            if (newfilter.getContains().getGenre() != null){
-                for (int i = 0; i < newfilter.getContains().getGenre().size(); i++){
-                    for (int j = 0; j < this.currentMoviesList.size(); j++){
+
+            if (newfilter.getContains().getGenre() != null) {
+                for (int i = 0; i < newfilter.getContains().getGenre().size(); i++) {
+                    for (int j = 0; j < this.currentMoviesList.size(); j++) {
                         if (!this.currentMoviesList.get(j).getGenres().contains(
                                 newfilter.getContains().getGenre().get(i))) {
                             this.currentMoviesList.remove(j);
@@ -130,9 +163,9 @@ public class Data {
             }
         }
         ArrayList<Movie> newMovies = new ArrayList<>();
-        for (int p = 0; p < getCurrentMoviesList().size(); p++){
-            Movie new_movie = new Movie(getCurrentMoviesList().get(p));
-            newMovies.add(new_movie);
+        for (int p = 0; p < getCurrentMoviesList().size(); p++) {
+            Movie newmovie = new Movie(getCurrentMoviesList().get(p));
+            newMovies.add(newmovie);
         }
 
         ClassOutput classOutput = new ClassOutput();
@@ -143,19 +176,25 @@ public class Data {
         output.addPOJO(classOutput);
     }
 
-    public void purchase(String seemovie, ArrayNode output) {
+    /**
+     * @param seemovie is the current movie (the movie which is on the page)
+     * @param output is the output where we write a json
+     *               method implements the purchase (when an user buys a movie)
+     */
+    public void purchase(final String seemovie, final ArrayNode output) {
         if (currentUser.getCredentials().getAccountType().equals("premium")) {
             int numberFreeMovies = currentUser.getNumFreePremiumMovies();
             if (numberFreeMovies > 0) {
                 for (Movie movie : currentMoviesList) {
                     if (movie.getName().equals(seemovie)) {
                         currentUser.getPurchasedMovies().add(movie);
-                        currentUser.setNumFreePremiumMovies(currentUser.getNumFreePremiumMovies() - 1);
+                        currentUser.setNumFreePremiumMovies(
+                                currentUser.getNumFreePremiumMovies() - 1);
                         break;
                     }
                 }
-            }else {
-                if (currentUser.getTokensCount() >= 2){
+            } else {
+                if (currentUser.getTokensCount() >= 2) {
                     for (Movie movie : currentMoviesList) {
                         if (movie.getName().equals(seemovie)) {
                             currentUser.getPurchasedMovies().add(movie);
@@ -165,8 +204,8 @@ public class Data {
                     }
                 }
             }
-        }else {
-            if (currentUser.getTokensCount() >= 2){
+        } else {
+            if (currentUser.getTokensCount() >= 2) {
                 for (Movie movie : currentMoviesList) {
                     if (movie.getName().equals(seemovie)) {
                         currentUser.getPurchasedMovies().add(movie);
@@ -178,9 +217,9 @@ public class Data {
         }
 
         ArrayList<Movie> newMovies = new ArrayList<>();
-        Movie new_movie = new Movie(getCurrentUser().getPurchasedMovies().get(
+        Movie newmovie = new Movie(getCurrentUser().getPurchasedMovies().get(
                 getCurrentUser().getPurchasedMovies().size() - 1));
-        newMovies.add(new_movie);
+        newMovies.add(newmovie);
 
         ClassOutput classOutput = new ClassOutput();
         classOutput.setError(null);
@@ -190,22 +229,28 @@ public class Data {
         output.addPOJO(classOutput);
     }
 
-    public void watch(String seemovie, ArrayNode output) {
-        int semPurchase = 0, index_semPurchase = 0;
-        for (int i = 0; i < currentUser.getPurchasedMovies().size(); i++){
-            if (currentUser.getPurchasedMovies().get(i).getName().equals(seemovie)){
+    /**
+     * @param seemovie is the current movie (the movie which is on the page)
+     * @param output is the output where we write a json
+     *               method implements tha watching task
+     */
+    public void watch(final String seemovie, final ArrayNode output) {
+        int semPurchase = 0, indexsemPurchase = 0;
+        for (int i = 0; i < currentUser.getPurchasedMovies().size(); i++) {
+            if (currentUser.getPurchasedMovies().get(i).getName().equals(seemovie)) {
                 semPurchase = 1;
-                index_semPurchase = i;
+                indexsemPurchase = i;
                 break;
             }
         }
-        if (semPurchase == 1){
-            currentUser.getWatchedMovies().add(currentUser.getPurchasedMovies().get(index_semPurchase));
+        if (semPurchase == 1) {
+            currentUser.getWatchedMovies().add(currentUser.getPurchasedMovies()
+                    .get(indexsemPurchase));
 
             ArrayList<Movie> newMovies = new ArrayList<>();
-            Movie new_movie = new Movie(getCurrentUser().getWatchedMovies().get(
+            Movie newmovie = new Movie(getCurrentUser().getWatchedMovies().get(
                     getCurrentUser().getWatchedMovies().size() - 1));
-            newMovies.add(new_movie);
+            newMovies.add(newmovie);
 
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError(null);
@@ -213,7 +258,7 @@ public class Data {
             classOutput.setCurrentUser(newuser);
             classOutput.setCurrentMoviesList(newMovies);
             output.addPOJO(classOutput);
-        }else {
+        } else {
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError("Error");
             classOutput.setCurrentUser(null);
@@ -222,25 +267,30 @@ public class Data {
         }
     }
 
-    public void like(String seemovie, ArrayNode output) {
+    /**
+     * @param seemovie is the current movie (the movie which is on the page)
+     * @param output is the output where we write a json
+     *               method implements the liking task
+     */
+    public void like(final String seemovie, final ArrayNode output) {
         int semWatch = 0, indexsemWatch = 0;
-        for (int i = 0; i < currentUser.getWatchedMovies().size(); i++){
-            if (currentUser.getWatchedMovies().get(i).getName().equals(seemovie)){
+        for (int i = 0; i < currentUser.getWatchedMovies().size(); i++) {
+            if (currentUser.getWatchedMovies().get(i).getName().equals(seemovie)) {
                 semWatch = 1;
                 indexsemWatch = i;
                 break;
             }
         }
-        if (semWatch == 1){
+        if (semWatch == 1) {
             currentUser.getLikedMovies().add(currentUser.getWatchedMovies().get(indexsemWatch));
             currentUser.getWatchedMovies().get(indexsemWatch).setNumLikes(
                     currentUser.getWatchedMovies().get(indexsemWatch).getNumLikes() + 1
             );
 
             ArrayList<Movie> newMovies = new ArrayList<>();
-            Movie new_movie = new Movie(getCurrentUser().getLikedMovies().get(
+            Movie newmovie = new Movie(getCurrentUser().getLikedMovies().get(
                     getCurrentUser().getLikedMovies().size() - 1));
-            newMovies.add(new_movie);
+            newMovies.add(newmovie);
 
 
             ClassOutput classOutput = new ClassOutput();
@@ -249,7 +299,7 @@ public class Data {
             classOutput.setCurrentUser(newuser);
             classOutput.setCurrentMoviesList(newMovies);
             output.addPOJO(classOutput);
-        }else {
+        } else {
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError("Error");
             classOutput.setCurrentUser(null);
@@ -258,17 +308,22 @@ public class Data {
         }
     }
 
-    public void rate(String seemovie, ArrayNode output, int rate) {
-
+    /**
+     * @param seemovie is the current movie (the movie which is on the page)
+     * @param output is the output where we write a json
+     * @param rate is the input rate
+     *             method implements the rating task
+     */
+    public void rate(final String seemovie, final ArrayNode output, final int rate) {
         int semWatch = 0, indexsemWatch = 0;
-        for (int i = 0; i < currentUser.getWatchedMovies().size(); i++){
-            if (currentUser.getWatchedMovies().get(i).getName().equals(seemovie)){
+        for (int i = 0; i < currentUser.getWatchedMovies().size(); i++) {
+            if (currentUser.getWatchedMovies().get(i).getName().equals(seemovie)) {
                 semWatch = 1;
                 indexsemWatch = i;
                 break;
             }
         }
-        if (semWatch == 1){
+        if (semWatch == 1) {
             currentUser.getRatedMovies().add(currentUser.getWatchedMovies().get(indexsemWatch));
 
             currentUser.getWatchedMovies().get(indexsemWatch).setRating(
@@ -279,10 +334,9 @@ public class Data {
             );
 
             ArrayList<Movie> newMovies = new ArrayList<>();
-            Movie new_movie = new Movie(getCurrentUser().getRatedMovies().get(
+            Movie newmovie = new Movie(getCurrentUser().getRatedMovies().get(
                     getCurrentUser().getRatedMovies().size() - 1));
-            newMovies.add(new_movie);
-
+            newMovies.add(newmovie);
 
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError(null);
@@ -290,7 +344,7 @@ public class Data {
             classOutput.setCurrentUser(newuser);
             classOutput.setCurrentMoviesList(newMovies);
             output.addPOJO(classOutput);
-        }else {
+        } else {
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError("Error");
             classOutput.setCurrentUser(null);
@@ -299,27 +353,38 @@ public class Data {
         }
     }
 
+    /**
+     * method implements the buyPremium task
+     */
     public void buyPremium() {
         int number = currentUser.getTokensCount();
-        if (number >= 10) {
+        if (number >= CHECKSTYLE_POINTS) {
             currentUser.getCredentials().setAccountType("premium");
-            currentUser.setTokensCount(number - 10);
+            currentUser.setTokensCount(number - CHECKSTYLE_POINTS);
         }
     }
 
-    public void buyTokens(int count) {
+    /**
+     * @param count is the count from input
+     *              method resolves the buyTokens task
+     */
+    public void buyTokens(final int count) {
         currentUser.setTokensCount(currentUser.getTokensCount() + count);
         int number = Integer.parseInt(currentUser.getCredentials().getBalance());
         int devide = number - count;
         String numberValue = String.valueOf(devide);
         currentUser.getCredentials().setBalance(numberValue);
     }
+
+    /**
+     * @return a simple toString method
+     */
     @Override
     public String toString() {
-        return "Data{" +
-                "currentPage=" + currentPage +
-                ", currentUser=" + currentUser +
-                ", currentMoviesList=" + currentMoviesList +
-                '}';
+        return "Data{"
+                + "currentPage=" + currentPage
+                + ", currentUser=" + currentUser
+                + ", currentMoviesList=" + currentMoviesList
+                + '}';
     }
 }

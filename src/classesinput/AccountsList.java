@@ -1,5 +1,4 @@
-package Classes;
-//unused
+package classesinput;
 public class AccountsList {
     private String name;
     private String password;
@@ -7,43 +6,73 @@ public class AccountsList {
     private String country;
     private String balance;
 
+    /**
+     * @return
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * @param name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    /**
+     * @param password
+     */
+    public void setPassword(final String password) {
         this.password = password;
     }
 
+    /**
+     * @return
+     */
     public String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    /**
+     * @param accountType
+     */
+    public void setAccountType(final String accountType) {
         this.accountType = accountType;
     }
 
+    /**
+     * @return
+     */
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    /**
+     * @param country
+     */
+    public void setCountry(final String country) {
         this.country = country;
     }
 
+    /**
+     * @return
+     */
     public String getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    /**
+     * @param balance
+     */
+    public void setBalance(final String balance) {
         this.balance = balance;
     }
 }

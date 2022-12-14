@@ -1,4 +1,6 @@
-import Classes.*;
+import classes.*;
+import classesinput.Filters;
+import classesinput.Input;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -7,14 +9,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static checker.CheckStyleConstants.CHECKSTYLE_POINTS;
+
 public class Main {
+    /**
+     * @param args
+     * @throws IOException
+     */
     public static void main(final String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode output = objectMapper.createArrayNode();
         Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
         //Creating the accounts list
         ArrayList<User> accountsLists = new ArrayList<>();
-        for (int i = 0; i < inputData.getUsers().size(); i++){
+        for (int i = 0; i < inputData.getUsers().size(); i++) {
             User newlist = new User();
             newlist.getCredentials().setAccountType(
                     inputData.getUsers().get(i).getCredentials().getAccountType());
@@ -31,7 +39,7 @@ public class Main {
 
         //Creating the movies list
         ArrayList<Movie> movieLists = new ArrayList<>();
-        for (int i = 0; i < inputData.getMovies().size(); i++){
+        for (int i = 0; i < inputData.getMovies().size(); i++) {
             Movie newlist = new Movie();
             newlist.setName(inputData.getMovies().get(i).getName());
             newlist.setYear(inputData.getMovies().get(i).getYear());
@@ -58,7 +66,7 @@ public class Main {
             if (actionType.equals("change page")) {
                 String page = inputData.getActions().get(numberaction).getPage();
                 int sem = 0;
-                for (int i = 0; i < database.getCurrentPage().getNextPages().size(); i++){
+                for (int i = 0; i < database.getCurrentPage().getNextPages().size(); i++) {
                     if (page.equals(database.getCurrentPage().getNextPages().get(i))) {
                         sem = 1;
                         break;
@@ -70,13 +78,12 @@ public class Main {
                     classOutput.setCurrentUser(null);
                     classOutput.setCurrentMoviesList(new ArrayList<>());
                     output.addPOJO(classOutput);
-                }else {
+                } else {
                     ArrayList<String> pages = new ArrayList<>();
                     if (page.equals("homepage autentificat")) {
                         pages.add("movies");
                         pages.add("upgrades");
                         pages.add("logout");
-
                     }
                     if (page.equals("movies")) {
                         pages.add("homepage autentificat");
@@ -107,7 +114,7 @@ public class Main {
                         classOutput.setCurrentUser(newuser);
 
                         ArrayList<Movie> moviesOut = new ArrayList<>();
-                        for (int p = 0; p < database.getCurrentMoviesList().size(); p++){
+                        for (int p = 0; p < database.getCurrentMoviesList().size(); p++) {
                             Movie newmovie = new Movie(database.getCurrentMoviesList().get(p));
                             moviesOut.add(newmovie);
                         }
@@ -131,25 +138,27 @@ public class Main {
                         String movieName = inputData.getActions().get(numberaction).getMovie();
                         int semMovie = 0;
 
-                        for (int k = 0; k < database.getCurrentMoviesList().size(); k++){
-                            if (database.getCurrentMoviesList().get(k).getName().equals(movieName)){
+                        for (int k = 0; k < database.getCurrentMoviesList().size(); k++) {
+                            if (database.getCurrentMoviesList()
+                                    .get(k).getName().equals(movieName)) {
                                 semMovie = 1;
                                 break;
                             }
                         }
-                        if (semMovie == 0){
+                        if (semMovie == 0) {
                             ClassOutput classOutput = new ClassOutput();
                             classOutput.setError("Error");
                             classOutput.setCurrentUser(null);
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
-                        }else {
+                        } else {
                             Seemovie = movieName; //saving the movie
                             ArrayList<Movie> newmovielist = new ArrayList<>();
                             Movie newmovie = new Movie();
                             //searching for movie
                             for (int i = 0; i < database.getCurrentMoviesList().size(); i++) {
-                                if (database.getCurrentMoviesList().get(i).getName().equals(Seemovie)){
+                                if (database.getCurrentMoviesList().get(i)
+                                        .getName().equals(Seemovie)) {
                                     newmovie = new Movie(database.getCurrentMoviesList().get(i));
                                     break;
                                 }
@@ -173,12 +182,12 @@ public class Main {
                         database.setCurrentMoviesList(new ArrayList<>());
                         Seemovie = null;
                         database.setCurrentPage(newpage);
-                    }else {
+                    } else {
                         Page pageadded = new Page(page, pages);
                         database.setCurrentPage(pageadded);
                     }
                 }
-            }else {
+            } else {
                 //on page action
                 String feauture = inputData.getActions().get(numberaction).getFeature();
                 if (feauture.equals("login")) {
@@ -213,7 +222,7 @@ public class Main {
                             classOutput.setCurrentUser(newuser);
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
-                        }else {
+                        } else {
                             database.setCurrentUser(null);
                             database.setCurrentPage(newpage);
                             ClassOutput classOutput = new ClassOutput();
@@ -222,7 +231,7 @@ public class Main {
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -245,16 +254,18 @@ public class Main {
                                 break;
                             }
                         }
-                        if (isAccountGood == 1){
+                        if (isAccountGood == 1) {
                             //adding account
                             database.setCurrentUser(new User());
                             database.setCurrentMoviesList(new ArrayList<>());
                             User accouter = new User();
                             accouter.getCredentials().setName(registerCredentials.getName());
-                            accouter.getCredentials().setPassword(registerCredentials.getPassword());
+                            accouter.getCredentials().setPassword(
+                                    registerCredentials.getPassword());
                             accouter.getCredentials().setBalance(registerCredentials.getBalance());
                             accouter.getCredentials().setCountry(registerCredentials.getCountry());
-                            accouter.getCredentials().setAccountType(registerCredentials.getAccountType());
+                            accouter.getCredentials().setAccountType(
+                                    registerCredentials.getAccountType());
                             accountsLists.add(accouter);
                             //set current account
                             database.getCurrentUser().setCredentials(registerCredentials);
@@ -272,7 +283,7 @@ public class Main {
                             classOutput.setCurrentUser(newuser);
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
-                        }else {
+                        } else {
                             database.setCurrentUser(null);
                             database.setCurrentPage(newpage);
                             ClassOutput classOutput = new ClassOutput();
@@ -281,7 +292,7 @@ public class Main {
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -291,10 +302,10 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("search")) {
-                    if (database.getCurrentPage().getName().equals("movies")){
+                    if (database.getCurrentPage().getName().equals("movies")) {
                         String startWith = inputData.getActions().get(numberaction).getStartsWith();
                         database.search(startWith, output);
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -304,7 +315,7 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("filter")) {
-                    if (database.getCurrentPage().getName().equals("movies")){
+                    if (database.getCurrentPage().getName().equals("movies")) {
                         database.setCurrentMoviesList(new ArrayList<>());
                         ArrayList<Movie> newMovies = new ArrayList<>();
                         String country = database.getCurrentUser().getCredentials().getCountry();
@@ -323,7 +334,7 @@ public class Main {
                         database.getCurrentMoviesList().addAll(newMovies);
                         Filters newfilter = inputData.getActions().get(numberaction).getFilters();
                         database.filter(newfilter, output);
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -333,11 +344,11 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("purchase")) {
-                    if (database.getCurrentPage().getName().equals("see details")){
+                    if (database.getCurrentPage().getName().equals("see details")) {
                         if (Seemovie != null) {
                             database.purchase(Seemovie, output);
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -347,11 +358,11 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("watch")) {
-                    if (database.getCurrentPage().getName().equals("see details")){
+                    if (database.getCurrentPage().getName().equals("see details")) {
                         if (Seemovie != null) {
                             database.watch(Seemovie, output);
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -361,11 +372,11 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("like")) {
-                    if (database.getCurrentPage().getName().equals("see details")){
+                    if (database.getCurrentPage().getName().equals("see details")) {
                         if (Seemovie != null) {
                             database.like(Seemovie, output);
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -375,12 +386,12 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("rate")) {
-                    if (database.getCurrentPage().getName().equals("see details")){
+                    if (database.getCurrentPage().getName().equals("see details")) {
                         if (Seemovie != null) {
                             int rate = inputData.getActions().get(numberaction).getRate();
-                            if (rate <= 5)
+                            if (rate <= CHECKSTYLE_POINTS / 2) {
                                 database.rate(Seemovie, output, rate);
-                            else {
+                            } else {
                                 ClassOutput classOutput = new ClassOutput();
                                 classOutput.setError("Error");
                                 classOutput.setCurrentUser(null);
@@ -388,7 +399,7 @@ public class Main {
                                 output.addPOJO(classOutput);
                             }
                         }
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -398,11 +409,12 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("buy premium account")) {
-                    if (database.getCurrentPage().getName().equals("upgrades")){
+                    if (database.getCurrentPage().getName().equals("upgrades")) {
                         if (database.getCurrentUser().getCredentials().
-                                getAccountType().equals("standard"))
+                                getAccountType().equals("standard")) {
                             database.buyPremium();
-                    }else {
+                        }
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
@@ -412,10 +424,10 @@ public class Main {
                     continue;
                 }
                 if (feauture.equals("buy tokens")) {
-                    if (database.getCurrentPage().getName().equals("upgrades")){
+                    if (database.getCurrentPage().getName().equals("upgrades")) {
                         int count = inputData.getActions().get(numberaction).getCount();
                         database.buyTokens(count);
-                    }else {
+                    } else {
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError("Error");
                         classOutput.setCurrentUser(null);
