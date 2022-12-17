@@ -5,41 +5,30 @@ public class Sort {
     private String duration;
 
     /**
-     * @return
+     * @return returning the rating method of sorting (increasing or decreasing)
      */
     public String getRating() {
         return rating;
     }
 
     /**
-     * @param rating
+     * @param rating setting the rating method of sorting (increasing or decreasing)
      */
     public void setRating(final String rating) {
         this.rating = rating;
     }
 
     /**
-     * @return
+     * @return returning the duration method of sorting (increasing or decreasing)
      */
     public String getDuration() {
         return duration;
     }
 
     /**
-     * @param duration
+     * @param duration setting the duration method of sorting (increasing or decreasing)
      */
     public void setDuration(final String duration) {
         this.duration = duration;
-    }
-
-    /**
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "Sort{"
-                + "rating='" + rating + '\''
-                + ", duration='" + duration + '\''
-                + '}';
     }
 }

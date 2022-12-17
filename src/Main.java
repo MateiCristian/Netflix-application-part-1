@@ -1,6 +1,7 @@
 import classes.*;
 import classesinput.Filters;
 import classesinput.Input;
+import classesoutput.ClassOutput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -17,6 +18,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
+        //Creating files for input and output
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode output = objectMapper.createArrayNode();
         Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
@@ -49,11 +51,13 @@ public class Main {
             newlist.setCountriesBanned(inputData.getMovies().get(i).getCountriesBanned());
             movieLists.add(newlist);
         }
+        //creating the database as a singleton
+        Data database = Data.getInstance();
 
-        Data database = new Data();
         ArrayList<String> nextpages = new ArrayList<>();
         database.setCurrentMoviesList(new ArrayList<>());
 
+        //setting pages where we can move
         nextpages.add("login");
         nextpages.add("register");
         Page newpage = new Page("homepage neautentificat", nextpages);
@@ -61,9 +65,11 @@ public class Main {
 
         String Seemovie = null;
 
+        //creating parser
         for (int numberaction = 0; numberaction < inputData.getActions().size(); numberaction ++) {
             String actionType = inputData.getActions().get(numberaction).getType();
             if (actionType.equals("change page")) {
+                //If action is the change page type
                 String page = inputData.getActions().get(numberaction).getPage();
                 int sem = 0;
                 for (int i = 0; i < database.getCurrentPage().getNextPages().size(); i++) {
@@ -79,6 +85,7 @@ public class Main {
                     classOutput.setCurrentMoviesList(new ArrayList<>());
                     output.addPOJO(classOutput);
                 } else {
+                    //If the page where we want to go is valid
                     ArrayList<String> pages = new ArrayList<>();
                     if (page.equals("homepage autentificat")) {
                         pages.add("movies");
@@ -108,6 +115,7 @@ public class Main {
                         }
                         database.getCurrentMoviesList().addAll(newMovies);
 
+                        //creating the output
                         ClassOutput classOutput = new ClassOutput();
                         classOutput.setError(null);
                         User newuser = new User(database.getCurrentUser());
@@ -152,10 +160,11 @@ public class Main {
                             classOutput.setCurrentMoviesList(new ArrayList<>());
                             output.addPOJO(classOutput);
                         } else {
+                            //If movie exists
                             Seemovie = movieName; //saving the movie
                             ArrayList<Movie> newmovielist = new ArrayList<>();
                             Movie newmovie = new Movie();
-                            //searching for movie
+                            //creating a deep copy for the movie
                             for (int i = 0; i < database.getCurrentMoviesList().size(); i++) {
                                 if (database.getCurrentMoviesList().get(i)
                                         .getName().equals(Seemovie)) {
@@ -188,7 +197,7 @@ public class Main {
                     }
                 }
             } else {
-                //on page action
+                //If action is the on page type
                 String feauture = inputData.getActions().get(numberaction).getFeature();
                 if (feauture.equals("login")) {
                     if (database.getCurrentPage().getName().equals("login")) {
@@ -216,6 +225,7 @@ public class Main {
                             Page pageadded = new Page("homepage autentificat", pages);
                             database.setCurrentPage(pageadded);
 
+                            //creating output
                             ClassOutput classOutput = new ClassOutput();
                             classOutput.setError(null);
                             User newuser = new User(database.getCurrentUser());
@@ -276,7 +286,7 @@ public class Main {
                             pages.add("logout");
                             Page pageadded = new Page("homepage autentificat", pages);
                             database.setCurrentPage(pageadded);
-
+                            //creating output
                             ClassOutput classOutput = new ClassOutput();
                             classOutput.setError(null);
                             User newuser = new User(database.getCurrentUser());
@@ -438,7 +448,6 @@ public class Main {
             }
         }
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-        objectWriter.writeValue(new File("src/Output"), output);
         objectWriter.writeValue(new File(args[1]), output);
     }
 }

@@ -2,6 +2,7 @@ package classes;
 
 import classesinput.Filters;
 import classesinput.Sort;
+import classesoutput.ClassOutput;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
@@ -14,12 +15,19 @@ public class Data {
     private User currentUser;
     private ArrayList<Movie> currentMoviesList;
 
+    private static Data dataInstance = null;
+
     public Data() {
         currentPage = new Page();
         currentUser = new User();
         currentMoviesList = new ArrayList<>();
     }
-
+    public static Data getInstance() {
+        if (dataInstance == null) {
+            dataInstance = new Data();
+        }
+        return dataInstance;
+    }
     /**
      * @return a simple getter for currentUser
      */
@@ -93,6 +101,7 @@ public class Data {
         Sort newsort = newfilter.getSort();
 
         if (newsort != null) {
+            //sorting for rating
             if (newsort.getRating() != null) {
                 if (newsort.getRating().equals("decreasing")) {
                     Collections.sort(this.currentMoviesList, (o1, o2) -> {
@@ -114,7 +123,7 @@ public class Data {
                     }
                 }
             }
-
+            //sorting for duration
             if (newsort.getDuration() != null) {
                 if (newsort.getDuration().equals("decreasing")) {
                     Collections.sort(this.currentMoviesList, (o1, o2) -> {
@@ -135,7 +144,7 @@ public class Data {
                 }
             }
         }
-
+        //removing the movies with that actors
         if (newfilter.getContains() != null) {
             if (newfilter.getContains().getActors() != null) {
                 for (int i = 0; i < newfilter.getContains().getActors().size(); i++) {
@@ -148,7 +157,7 @@ public class Data {
                     }
                 }
             }
-
+            //removing the movies with that genres
             if (newfilter.getContains().getGenre() != null) {
                 for (int i = 0; i < newfilter.getContains().getGenre().size(); i++) {
                     for (int j = 0; j < this.currentMoviesList.size(); j++) {
@@ -162,12 +171,13 @@ public class Data {
                 }
             }
         }
+        //deep copy for output
         ArrayList<Movie> newMovies = new ArrayList<>();
         for (int p = 0; p < getCurrentMoviesList().size(); p++) {
             Movie newmovie = new Movie(getCurrentMoviesList().get(p));
             newMovies.add(newmovie);
         }
-
+        //creating output
         ClassOutput classOutput = new ClassOutput();
         classOutput.setError(null);
         User newuser = new User(currentUser);
@@ -215,12 +225,12 @@ public class Data {
                 }
             }
         }
-
+        //deep copy for output
         ArrayList<Movie> newMovies = new ArrayList<>();
         Movie newmovie = new Movie(getCurrentUser().getPurchasedMovies().get(
                 getCurrentUser().getPurchasedMovies().size() - 1));
         newMovies.add(newmovie);
-
+        //creating output
         ClassOutput classOutput = new ClassOutput();
         classOutput.setError(null);
         User newuser = new User(currentUser);
@@ -246,12 +256,12 @@ public class Data {
         if (semPurchase == 1) {
             currentUser.getWatchedMovies().add(currentUser.getPurchasedMovies()
                     .get(indexsemPurchase));
-
+            //deep copy for output
             ArrayList<Movie> newMovies = new ArrayList<>();
             Movie newmovie = new Movie(getCurrentUser().getWatchedMovies().get(
                     getCurrentUser().getWatchedMovies().size() - 1));
             newMovies.add(newmovie);
-
+            //creating output
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError(null);
             User newuser = new User(currentUser);
@@ -286,13 +296,13 @@ public class Data {
             currentUser.getWatchedMovies().get(indexsemWatch).setNumLikes(
                     currentUser.getWatchedMovies().get(indexsemWatch).getNumLikes() + 1
             );
-
+            //deep copy for output
             ArrayList<Movie> newMovies = new ArrayList<>();
             Movie newmovie = new Movie(getCurrentUser().getLikedMovies().get(
                     getCurrentUser().getLikedMovies().size() - 1));
             newMovies.add(newmovie);
 
-
+            //creating output
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError(null);
             User newuser = new User(currentUser);
@@ -332,12 +342,13 @@ public class Data {
             currentUser.getWatchedMovies().get(indexsemWatch).setNumRatings(
                     currentUser.getWatchedMovies().get(indexsemWatch).getNumRatings() + 1
             );
-
+            //deep copy for output
             ArrayList<Movie> newMovies = new ArrayList<>();
             Movie newmovie = new Movie(getCurrentUser().getRatedMovies().get(
                     getCurrentUser().getRatedMovies().size() - 1));
             newMovies.add(newmovie);
 
+            //creating output
             ClassOutput classOutput = new ClassOutput();
             classOutput.setError(null);
             User newuser = new User(currentUser);

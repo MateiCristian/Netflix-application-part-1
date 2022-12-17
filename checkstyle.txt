@@ -1,11 +1,12 @@
 Starting audit...
 [ERROR] C:\Users\Windows\Desktop\proiect1\.\src\checker\CheckStyleConstants.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\classes\Data.java:25:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:1:15: Using the '.*' form of import should be avoided - classes.*. [AvoidStarImport]
-[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:14:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
-[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:19:5: Method length is 425 lines (max allowed is 150). [MethodLength]
-[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:62:16: Name 'Seemovie' must match pattern '^[a-z][a-zA-Z0-9]*$'. [LocalVariableName]
-[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:64:95: '++' is preceded with whitespace. [NoWhitespaceBefore]
+[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:15:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:20:5: Method length is 433 lines (max allowed is 150). [MethodLength]
+[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:66:16: Name 'Seemovie' must match pattern '^[a-z][a-zA-Z0-9]*$'. [LocalVariableName]
+[ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Main.java:69:95: '++' is preceded with whitespace. [NoWhitespaceBefore]
 [ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Test.java:1: File does not end with a newline. [NewlineAtEndOfFile]
 [ERROR] C:\Users\Windows\Desktop\proiect1\.\src\Test.java:9:28: Using the '.*' form of import should be avoided - java.util.concurrent.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 8 errors.
+Checkstyle ends with 9 errors.

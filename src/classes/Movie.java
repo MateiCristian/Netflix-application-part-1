@@ -27,133 +27,133 @@ public class Movie {
     }
 
     /**
-     * @return
+     * @return returning the value of name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name
+     * @param name setting value for name
      */
     public void setName(final String name) {
         this.name = name;
     }
 
     /**
-     * @return
+     * @return returning the value of year
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * @param year
+     * @param year setting value for year
      */
     public void setYear(final int year) {
         this.year = year;
     }
 
     /**
-     * @return
+     * @return returning the value of duration
      */
     public int getDuration() {
         return duration;
     }
 
     /**
-     * @param duration
+     * @param duration setting value for duration
      */
     public void setDuration(final int duration) {
         this.duration = duration;
     }
 
     /**
-     * @return
+     * @return returning all genres for a movie
      */
     public ArrayList<String> getGenres() {
         return genres;
     }
 
     /**
-     * @param genres
+     * @param genres setting value for genres
      */
     public void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
 
     /**
-     * @return
+     * @return returning all movie actors
      */
     public ArrayList<String> getActors() {
         return actors;
     }
 
     /**
-     * @param actors
+     * @param actors setting the movie actors
      */
     public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
     /**
-     * @return
+     * @return returning all the banned countries
      */
     public ArrayList<String> getCountriesBanned() {
         return countriesBanned;
     }
 
     /**
-     * @param countriesBanned
+     * @param countriesBanned setting the banned countries
      */
     public void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
 
     /**
-     * @return
+     * @return returning the number of likes
      */
     public int getNumLikes() {
         return numLikes;
     }
 
     /**
-     * @param numLikes
+     * @param numLikes setting number of likes
      */
     public void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
     }
 
     /**
-     * @return
+     * @return returning the rating
      */
     public Double getRating() {
         return rating;
     }
 
     /**
-     * @param rating
+     * @param rating setting ratting
      */
     public void setRating(final Double rating) {
         this.rating = rating;
     }
 
     /**
-     * @return
+     * @return returning the number of people who give rate
      */
     public int getNumRatings() {
         return numRatings;
     }
 
     /**
-     * @param numRatings
+     * @param numRatings setting number of rating
      */
     public void setNumRatings(final int numRatings) {
         this.numRatings = numRatings;
     }
 
     /**
-     * @return
+     * @return returning all the movie parameters
      */
     @Override
     public String toString() {

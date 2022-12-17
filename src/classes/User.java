@@ -51,21 +51,22 @@ public class User {
     }
 
     /**
-     * @return
+     * @return returning the credentials of a user
      */
     public Credentials getCredentials() {
         return credentials;
     }
 
     /**
-     * @param credentials
+     * @param credentials setting the credentials of a user
      */
     public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
     }
 
     /**
-     * @param accountsList
+     * setting only the initial credentials for a user
+     * @param accountsList contains only the input credentials
      */
     public void setCredentials(final AccountsList accountsList) {
         this.credentials = new Credentials();
@@ -77,91 +78,91 @@ public class User {
     }
 
     /**
-     * @return
+     * @return returning the number of tokens
      */
     public int getTokensCount() {
         return tokensCount;
     }
 
     /**
-     * @param tokensCount
+     * @param tokensCount setting the number of tokens
      */
     public void setTokensCount(final int tokensCount) {
         this.tokensCount = tokensCount;
     }
 
     /**
-     * @return
+     * @return returning the number of free movies
      */
     public int getNumFreePremiumMovies() {
         return numFreePremiumMovies;
     }
 
     /**
-     * @param numFreePremiumMovies
+     * @param numFreePremiumMovies setting the number of free movies
      */
     public void setNumFreePremiumMovies(final int numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
 
     /**
-     * @return
+     * @return returning an arraylist with all the purchased movies
      */
     public ArrayList<Movie> getPurchasedMovies() {
         return purchasedMovies;
     }
 
     /**
-     * @param purchasedMovies
+     * @param purchasedMovies setting value for all the purchased movies
      */
     public void setPurchasedMovies(final ArrayList<Movie> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
 
     /**
-     * @return
+     * @return returning an arraylist with all the watched movies
      */
     public ArrayList<Movie> getWatchedMovies() {
         return watchedMovies;
     }
 
     /**
-     * @param watchedMovies
+     * @param watchedMovies setting value for all the watched movies
      */
     public void setWatchedMovies(final ArrayList<Movie> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
 
     /**
-     * @return
+     * @return returning an arraylist with all the liked movies
      */
     public ArrayList<Movie> getLikedMovies() {
         return likedMovies;
     }
 
     /**
-     * @param likedMovies
+     * @param likedMovies setting value for all the liked movies
      */
     public void setLikedMovies(final ArrayList<Movie> likedMovies) {
         this.likedMovies = likedMovies;
     }
 
     /**
-     * @return
+     * @return returning an arraylist with all the rated movies
      */
     public ArrayList<Movie> getRatedMovies() {
         return ratedMovies;
     }
 
     /**
-     * @param ratedMovies
+     * @param ratedMovies setting value for all the rated movies
      */
     public void setRatedMovies(final ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
 
     /**
-     * @return
+     * @return returning all the elements of a user
      */
     @Override
     public String toString() {

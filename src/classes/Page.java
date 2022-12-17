@@ -13,35 +13,36 @@ public class Page {
     }
 
     /**
-     * @return
+     * @return returning the name of the current page
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name
+     * @param name setting the name of the current page
      */
     public void setName(final String name) {
         this.name = name;
     }
 
     /**
-     * @return
+     * @return returning an arraylist of next pages
      */
     public ArrayList<String> getNextPages() {
         return nextPages;
     }
 
     /**
-     * @param nextPages
+     * method sets all the name of the pages where you can navigate from the current page
+     * @param nextPages is an arraylist with all page names
      */
     public void setNextPages(final ArrayList<String> nextPages) {
         this.nextPages = nextPages;
     }
 
     /**
-     * @return
+     * @return returning all the page parameters
      */
     @Override
     public String toString() {

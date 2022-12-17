@@ -15,7 +15,7 @@ public class Actions {
     private int count;
 
     /**
-     * @return
+     * @return returning all the elements of credentials
      */
     @Override
     public String toString() {
@@ -34,140 +34,140 @@ public class Actions {
     }
 
     /**
-     * @return
+     * @return returning the count
      */
     public int getCount() {
         return count;
     }
 
     /**
-     * @param count
+     * @param count setting count for credentials
      */
     public void setCount(final int count) {
         this.count = count;
     }
 
     /**
-     * @return
+     * @return returning the type
      */
     public String getType() {
         return type;
     }
 
     /**
-     * @param type
+     * @param type setting type
      */
     public void setType(final String type) {
         this.type = type;
     }
 
     /**
-     * @return
+     * @return returning the page
      */
     public String getPage() {
         return page;
     }
 
     /**
-     * @param page
+     * @param page setting page
      */
     public void setPage(final String page) {
         this.page = page;
     }
 
     /**
-     * @return
+     * @return returning the feature
      */
     public String getFeature() {
         return feature;
     }
 
     /**
-     * @param feature
+     * @param feature setting the feature
      */
     public void setFeature(final String feature) {
         this.feature = feature;
     }
 
     /**
-     * @return
+     * @return returning credentials
      */
     public Credentials getCredentials() {
         return credentials;
     }
 
     /**
-     * @param credentials
+     * @param credentials setting credentials
      */
     public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
     }
 
     /**
-     * @return
+     * @return returning filters
      */
     public Filters getFilters() {
         return filters;
     }
 
     /**
-     * @param filters
+     * @param filters setting filters
      */
     public void setFilters(final Filters filters) {
         this.filters = filters;
     }
 
     /**
-     * @return
+     * @return returning a string
      */
     public String getStartsWith() {
         return startsWith;
     }
 
     /**
-     * @param startsWith
+     * @param startsWith setting the value for a string
      */
     public void setStartsWith(final String startsWith) {
         this.startsWith = startsWith;
     }
 
     /**
-     * @return
+     * @return returning the object type
      */
     public String getObjectType() {
         return objectType;
     }
 
     /**
-     * @param objectType
+     * @param objectType setting the object type
      */
     public void setObjectType(final String objectType) {
         this.objectType = objectType;
     }
 
     /**
-     * @return
+     * @return returning the movie
      */
     public String getMovie() {
         return movie;
     }
 
     /**
-     * @param movie
+     * @param movie setting a movie
      */
     public void setMovie(final String movie) {
         this.movie = movie;
     }
 
     /**
-     * @return
+     * @return returning the rating
      */
     public int getRate() {
         return rate;
     }
 
     /**
-     * @param rate
+     * @param rate setting rating
      */
     public void setRate(final int rate) {
         this.rate = rate;

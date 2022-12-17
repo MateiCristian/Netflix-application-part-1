@@ -1,4 +1,7 @@
-package classes;
+package classesoutput;
+
+import classes.Movie;
+import classes.User;
 
 import java.util.ArrayList;
 

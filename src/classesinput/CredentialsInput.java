@@ -6,26 +6,16 @@ public class CredentialsInput {
     private Credentials credentials;
 
     /**
-     * @return
+     * @return returning credentials
      */
     public Credentials getCredentials() {
         return credentials;
     }
 
     /**
-     * @param credentials
+     * @param credentials setting credentials
      */
     public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
-    }
-
-    /**
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "CredentialsInput{"
-                + "credentials=" + credentials
-                + '}';
     }
 }
